@@ -13,7 +13,8 @@ steps:
     - eval $(aws ecr get-login --no-include-email --region eu-west-2)
     - docker pull 245542037479.dkr.ecr.eu-west-2.amazonaws.com/devops/devops/config-drift-monitor:latest
   volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
+    - name: docker
+      path: /var/run/docker.sock
 - name: int-v3-croud
   when:
     branch:
