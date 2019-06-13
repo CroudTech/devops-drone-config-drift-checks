@@ -36,3 +36,7 @@ steps:
   image: 245542037479.dkr.ecr.eu-west-2.amazonaws.com/devops/devops/config-drift-monitor:latest
   commands:
   - /app/start.py --namespace int-v3-platform --hangouts-notify --space-name "CroudTechBot Test"
+volumes:
+- name: docker
+  host:
+    path: /var/run/docker.sock
