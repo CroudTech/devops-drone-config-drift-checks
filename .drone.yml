@@ -8,18 +8,18 @@ steps:
     - master
   image: croudtech/config-drift-monitor:latest
   commands:
-  - /app/start.py --namespace int-v3-croud --hangouts-notify --space-name "CroudTechBot Test"
+  - /entrypoint/entrypoint.sh /app/start.py --namespace int-v3-croud --hangouts-notify --space-name "CroudTechBot Test"
 - name: int-v3-network
   when:
     branch:
     - master
   image: croudtech/config-drift-monitor:latest
   commands:
-  - /app/start.py --namespace int-v3-network --hangouts-notify --space-name "CroudTechBot Test"
+  - /entrypoint/entrypoint.sh /app/start.py --namespace int-v3-network --hangouts-notify --space-name "CroudTechBot Test"
 - name: int-v3-platform
   when:
     branch:
     - master
   image: croudtech/config-drift-monitor:latest
   commands:
-  - /app/start.py --namespace int-v3-platform --hangouts-notify --space-name "CroudTechBot Test"
+  - /entrypoint/entrypoint.sh /app/start.py --namespace int-v3-platform --hangouts-notify --space-name "CroudTechBot Test"
