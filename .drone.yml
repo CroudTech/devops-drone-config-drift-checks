@@ -2,41 +2,24 @@ kind: pipeline
 name: default
 
 steps:
-- name: docker-login
-  when:
-    branch:
-    - master
-  image: croudtech/docker-aws:latest
-  pull: true
-  privileged: true
-  commands:
-    - eval $(aws ecr get-login --no-include-email --region eu-west-2)
-    - docker pull 245542037479.dkr.ecr.eu-west-2.amazonaws.com/devops/config-drift-monitor:latest
-  volumes:
-    - name: docker
-      path: /var/run/docker.sock
 - name: int-v3-croud
   when:
     branch:
     - master
-  image: 245542037479.dkr.ecr.eu-west-2.amazonaws.com/devops/config-drift-monitor:latest
+  image: croudtech/config-drift-monitor:latest
   commands:
   - /app/start.py --namespace int-v3-croud --hangouts-notify --space-name "CroudTechBot Test"
 - name: int-v3-network
   when:
     branch:
     - master
-  image: 245542037479.dkr.ecr.eu-west-2.amazonaws.com/devops/config-drift-monitor:latest
+  image: croudtech/config-drift-monitor:latest
   commands:
   - /app/start.py --namespace int-v3-network --hangouts-notify --space-name "CroudTechBot Test"
 - name: int-v3-platform
   when:
     branch:
     - master
-  image: 245542037479.dkr.ecr.eu-west-2.amazonaws.com/devops/config-drift-monitor:latest
+  image: croudtech/config-drift-monitor:latest
   commands:
   - /app/start.py --namespace int-v3-platform --hangouts-notify --space-name "CroudTechBot Test"
-volumes:
-- name: docker
-  host:
-    path: /var/run/docker.sock
